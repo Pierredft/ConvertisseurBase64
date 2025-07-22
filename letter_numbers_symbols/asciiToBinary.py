@@ -84,3 +84,43 @@ class ASCIIToBinaryApp:
             fg='#7f8c8d'
         )
         info_range.pack(pady=(5,0))
+
+        # === BOUTON CONVERTIR ===
+        convert_button = ttk.Button(
+            main_frame,
+            text="🔄 Convertir en Binaire",
+            style='Convert.TButton',
+            command=self.convert_to_binary
+        )
+        convert_button.pack(pady=20)
+
+        # === ZONE DE RÉSULTAT ===
+        result_section = tk.Frame(main_frame, bg='#f5f5f5')
+        result_section.pack(pady=10, fill='x')
+
+        result_title = tk.Label(
+            result_section,
+            bg='#f5f5f5',
+            fg='#34495e',
+        )
+        result_title.pack(pady=(0,8))
+
+        # Frame pour le résultat avec bordure
+        result_frame = tk.Frame(
+            result_section,
+            bg='white',
+            relief='solid',
+            borderwidth=1,
+        )
+        result_frame.pack(pady=5, padx=10, fill='x', ipady=10)
+
+        self.result_label = tk.Label(
+            result_frame,
+            text='Aucune conversion effectuée',
+            font=('Arial', 14, 'bold'),
+            bg='white',
+            fg='#95a5a6',
+            wraplength=350,
+            justify='center'
+        )
+        self.result_label.pack(pady=15)
