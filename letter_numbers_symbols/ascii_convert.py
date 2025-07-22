@@ -21,7 +21,7 @@ class ConvertApp:
         """
         self.root = root
         self.root.title("Convertisseur Lettre, Chiffre et Symbole -> ASCII")
-        self.root.geometry("400x320")
+        self.root.geometry("800x450")
         self.root.resizable(False, False) # Ne pas redimensionner la fenêtre
 
         # Configuration du style
