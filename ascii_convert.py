@@ -147,3 +147,9 @@ class ConvertApp:
             fg='#666666'
         )
         self.letter_entry.focus()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ConvertApp(root)
+    root.mainlopp()
+    print("Application fermée. Merci d'avoir utilisé le convertisseur !")
