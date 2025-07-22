@@ -100,4 +100,18 @@ class ConvertApp:
             fg='#888888'
         )
         info_label.pack(side='bottom', pady=(20, 0))
+
+    def validate_input(self, value):
+        if value == "":
+            return True
+        
+        if len(value) == 1:
+            return False
+        
+        if len(value) == 1 and value.isalpha():
+            return True
+        
+        return False
+    
+    
         
