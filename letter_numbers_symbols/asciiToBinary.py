@@ -44,4 +44,43 @@ class ASCIIToBinaryApp:
         )
         title_label.pack(pady=20)
 
-        
+        # === FRAME PRINCIPAL ===
+        main_frame = tk.Frame(self.root, bg='#f5f5f5')
+        main_frame.pack(pady=10, padx=30, fill='both', expand=True)
+
+        # === SECTION SAISIE ASCII ===
+        input_section = tk.Frame(main_frame, bg='#f5f5f5')
+        input_section.pack(pady=10, fill='x')
+
+        input_label = tk.Label(
+            input_section,
+            text="Entrez un code ASCII (0-127) : ",
+            font=('Arial', 12, 'bold'),
+            bg='#f5f5f5',
+            fg='#34495e'
+        )
+        input_label.pack(pady=(0, 8))
+
+        # champ de saisie avec validation
+        self.ascii_var = tk.StringVar()
+        self.ascii_entry = tk.Entry(
+            input_section,
+            textvariable=self.ascii_var,
+            font=('Arial', 14),
+            width=15,
+            justify='center',
+            validate='key',
+            validatecommand=(self.root.register(self.validate_ascii_input), '%P')
+        )
+        self.ascii_entry.pack(pady=5)
+        self.ascii_entry.focus()
+
+        # Info sur la plage valide
+        info_range = tk.Label(
+            input_section,
+            text="💡 Plage valide : 0 à 127 (ASCII standard)",
+            font=('Arial', 9),
+            bg='#f5f5f5',
+            fg='#7f8c8d'
+        )
+        info_range.pack(pady=(5,0))
