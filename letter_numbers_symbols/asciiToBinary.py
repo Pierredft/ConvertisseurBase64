@@ -166,4 +166,14 @@ class ASCIIToBinaryApp:
         )
         examples_button.pack(side='right', padx=10)
 
-        
+        # === INFO ASCII/BINAIRE ===
+        footer_info = tk.Label(
+            main_frame,
+            text="💡 Le binaire représente les nombres en base 2 (seulement 0 et 1)",
+            font=('Arial', 9),
+            bg='#f5f5f5',
+            fg='#95a5a6'
+        )
+        footer_info.pack(side='bottom', pady=(15, 0))
+
+    
