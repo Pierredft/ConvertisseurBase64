@@ -1,20 +1,26 @@
+"""
+VERSION ALTERNATIVE - Affichage flexible
+Cette version adapte automatiquement la taille selon le contenu
+"""
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 
 class ConvertApp:
-    def _init_(self, root):
+    def __init__(self, root):
         self.root = root
         self.root.title("Convertisseur Lettre -> ASCII")
-        self.root.geometry("400x300")
+        self.root.geometry("400x320")  # Légèrement plus haut
         self.root.resizable(False, False)
 
-        self.setup_styles()
+        self.setup_style()
+        self.create_widgets()
 
     def setup_style(self):
         self.root.configure(bg='#f0f0f0')
         style = ttk.Style()
         style.configure('Custom.TButton',
-                        font=('Arial',12, 'bolde'),
+                        font=('Arial',12, 'bold'),
                         padding=(10,5))
     
     def create_widgets(self):
@@ -22,7 +28,7 @@ class ConvertApp:
             self.root,
             text="🔤 Convertisseur Lettre -> ASCII",
             font=('Arial', 16, 'bold'),
-            bg="#fb0000",
+            bg="#F0F0F0",
             fg='#333333'
         )
         title_label.pack(pady=20)
@@ -38,7 +44,7 @@ class ConvertApp:
         )
         input_label.pack(pady=(0,5))
 
-        self.lettre_var = tk.StringVar()
+        self.letter_var = tk.StringVar()
         self.letter_entry = tk.Entry(
             main_frame,
             textvariable=self.letter_var,
@@ -54,19 +60,20 @@ class ConvertApp:
         convert_button = ttk.Button(
             main_frame,
             text="🔄 Convertir",
-            style='Custome.TButton',
+            style='Custom.TButton',
             command=self.convert_letter
         )
         convert_button.pack(pady=15)
 
         result_label = tk.Label (
             main_frame,
-            text='Resultat :',
+            text='Résultat :',
             font=('Arial', 12),
             bg='#f0f0f0'
         )
         result_label.pack(pady=(10, 5))
 
+        # VERSION FLEXIBLE - le frame s'adapte au contenu
         result_frame = tk.Frame(
             main_frame,
             bg='white',
@@ -74,14 +81,17 @@ class ConvertApp:
             borderwidth=2
         )
         result_frame.pack(pady=5, padx=20, fill='x')
+        # PAS de pack_propagate(False) -> le frame s'adapte
 
         self.result_label = tk.Label(
             result_frame,
             text='Aucune conversion effectuée',
-            font=('Arial', 14, 'bold'),
+            font=('Arial', 12, 'bold'),
             bg='white',
             fg='#666666',
-            pady=15
+            pady=15,  # Padding généreux
+            wraplength=300,
+            justify='center'
         )
         self.result_label.pack()
 
@@ -105,7 +115,7 @@ class ConvertApp:
         if value == "":
             return True
         
-        if len(value) == 1:
+        if len(value) > 1:  # CORRECTION du bug
             return False
         
         if len(value) == 1 and value.isalpha():
@@ -113,7 +123,6 @@ class ConvertApp:
         
         return False
     
-
     def convert_letter(self):
         letter = self.letter_var.get().strip()
 
@@ -126,21 +135,22 @@ class ConvertApp:
             return
         
         ascii_code = ord(letter)
-        result_text = f"'{letter}' -> {ascii_code}"
 
         if letter.isupper():
             category = "majuscule"
         else:
             category = "minuscule"
 
+        # Affichage sur 2 lignes clairement séparées
         self.result_label.config(
-            text=f"{result_text}\n(lettre {category})",
-            fg='#2c5aa0'
+            text=f"'{letter}' -> {ascii_code}\n(lettre {category})",
+            fg='#2c5aa0',
+            font=('Arial', 12, 'bold')
         )
 
         print(f"Conversion effectuée : {letter} = {ascii_code}")
 
-    def clear_all(self):
+    def clear_input(self):
         self.letter_var.set("")
         self.result_label.config(
             text="Aucune conversion effectuée",
@@ -151,5 +161,5 @@ class ConvertApp:
 if __name__ == "__main__":
     root = tk.Tk()
     app = ConvertApp(root)
-    root.mainlopp()
+    root.mainloop()
     print("Application fermée. Merci d'avoir utilisé le convertisseur !")
