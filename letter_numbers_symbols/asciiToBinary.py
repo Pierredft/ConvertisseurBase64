@@ -144,3 +144,26 @@ class ASCIIToBinaryApp:
             justify='left'
         )
         self.details_label.pack(pady=5)
+
+        # === BOUTONS D'ACTION ===
+        buttons_frame = tk.Frame(main_frame, bg='#f5f5f5')
+        buttons_frame.pack(pady=15)
+
+        clear_button = ttk.Button(
+            buttons_frame,
+            text="🗑️ Effacer",
+            style='Clear.TButton',
+            command=self.clear_all
+        )
+        clear_button.pack(side='left', padx=10)
+
+        # Bouton bonus : exemples
+        examples_button = ttk.Button(
+            buttons_frame,
+            text="📚 Exemples",
+            style='Clear.TButton',
+            commande=self.show_examples
+        )
+        examples_button.pack(side='right', padx=10)
+
+        
