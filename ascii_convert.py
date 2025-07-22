@@ -113,5 +113,37 @@ class ConvertApp:
         
         return False
     
-    
+
+    def convert_letter(self):
+        letter = self.letter_var.get().strip()
+
+        if not letter:
+            messagebox.showwarning(
+                "Attention",
+                "Veuillez saisir une lettre avant de convertir !"
+            )
+            self.letter_entry.focus()
+            return
         
+        ascii_code = ord(letter)
+        result_text = f"'{letter}' -> {ascii_code}"
+
+        if letter.isupper():
+            category = "majuscule"
+        else:
+            category = "minuscule"
+
+        self.result_label.config(
+            text=f"{result_text}\n(lettre {category})",
+            fg='#2c5aa0'
+        )
+
+        print(f"Conversion effectuée : {letter} = {ascii_code}")
+
+    def clear_all(self):
+        self.letter_var.set("")
+        self.result_label.config(
+            text="Aucune conversion effectuée",
+            fg='#666666'
+        )
+        self.letter_entry.focus()
