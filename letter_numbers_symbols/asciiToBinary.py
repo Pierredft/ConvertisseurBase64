@@ -287,4 +287,66 @@ class ASCIIToBinaryApp:
         )
         self.ascii_entry.focus()
 
-    
+    def show_examples(self):
+        """
+        Affiche une fenêtre avec des exemples de conversion
+        """
+
+        examples_window = tk.Toplevel(self.root)
+        examples_window.title("Exemples de conversions ASCII → Binaire")
+        examples_window.geometry("500x400")
+        examples_window.resizable(False, False)
+        examples_window.configure(bg='#f8f9fa')
+
+        # Titre
+        title = tk.Label(
+            examples_window,
+            text="📚 Exemples de conversions",
+            font=('Arial', 16, 'bold'),
+            bg='#f8f9fa',
+            fg='#2c3e50'
+        )
+        title.pack(pady=15)
+
+        # Exemples
+        examples_text = """
+🔤 LETTRES :
+• ASCII 65 → 01000001 → 'A'
+• ASCII 97 → 01100001 → 'a'
+
+🔢 CHIFFRES :
+• ASCII 48 → 00110000 → '0'
+• ASCII 57 → 00111001 → '9'
+
+🔣 SYMBOLES :
+• ASCII 33 → 00100001 → '!'
+• ASCII 64 → 01000000 → '@'
+• ASCII 32 → 00100000 → [ESPACE]
+
+⚡ CARACTÈRES SPÉCIAUX :
+• ASCII 10 → 00001010 → [SAUT DE LIGNE]
+• ASCII 13 → 00001101 → [RETOUR CHARIOT]
+• ASCII 127 → 01111111 → [DELETE]
+
+💡 ASTUCE :
+Le binaire se lit de droite à gauche avec les puissances de 2 :
+128 64 32 16 8 4 2 1
+        """
+
+        examples_label = tk.Label(
+            examples_window,
+            text=examples_text,
+            font=('Courier', 11),
+            bg='#f8f9fa',
+            fg='#2c3e50',
+            justify='left'
+        )
+        examples_label.pack(pady=10, padx=20)
+
+        # Bouton fermer
+        close_button = ttk.Button(
+            examples_window,
+            text="Fermer",
+            command=examples_window.destroy
+        )
+        close_button.pack(pady=15)
