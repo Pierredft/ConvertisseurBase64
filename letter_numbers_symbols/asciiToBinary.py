@@ -271,4 +271,20 @@ class ASCIIToBinaryApp:
         else:
             return "Aucun bit à convertir"
         
+    def clear_all(self):
+        """ 
+        Remet à zéro l'application
+        """
+
+        self.ascii_var.set("")
+        self.result_label.config(
+            text="Aucune conversion effectuée",
+            fg='#95a5a6'
+        )
+        self.details_label.config(
+            text="Les détails de conversion s'afficheront ici",
+            fg='#7f8c8d'
+        )
+        self.ascii_entry.focus()
+
     
