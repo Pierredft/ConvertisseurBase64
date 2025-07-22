@@ -176,4 +176,79 @@ class ASCIIToBinaryApp:
         )
         footer_info.pack(side='bottom', pady=(15, 0))
 
-    
+    def validate_ascii_input(self, value):
+        """
+        Fonction de validation pour les codes ASCII
+        Accepte seulement les nombres de 0 à 127
+        """
+
+        #Si c'est vide, on accepte
+        if value == "":
+            return True
+        
+        # Vérifier que ce sont uniquement des chiffres
+        if not value.isdigit():
+            return False
+        
+        # Vérifier que la valeur est dasn la plage ASCII valide (0-127)
+        try:
+            ascii_value = int(value)
+            if 0 <= ascii_value <= 127:
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+        
+    def convert_to_binary(self):
+        """
+        Fonction principale de conversion ASCII -> Binaire
+        """
+        ascii_str = self.ascii_var.get().strip()
+
+        # Vérification que quelque chose a été saisi
+        if not ascii_str:
+            messagebox.showwarning(
+                "Attention",
+                "Veuillez saisir un code ASCII avant de convertir !"
+            )
+            self.ascii_entry.focus()
+            return
+        
+        #Conversion en entier
+        ascii_code = int(ascii_str)
+
+        # Conversion en binaire (sans le préfixe '0b')
+        binary_result = bin(ascii_code)[2:] # [2:] enlève le '0b' du début
+
+        # Formatage sur 8 bits (standard ASCII)
+        binary_8bits = binary_result.zfill(8) # Complète avec des 0 à gauche
+
+        # Déterminer le caractère correspondant (si imprimable)
+        if 32 <= ascii_code <= 126:  # Plage des caractères imprimables
+            character = chr(ascii_code)
+            char_info = f"Caractère : '{character}'"
+        else:
+            char_info = "Caractère : [non imprimable]"
+
+        # Affichage du résultat principal
+        self.result_label.config(
+            text=f"ASCII {ascii_code} -> {binary_8bits}\n({char_info})",
+            fg='#27ae60' # Vert pour le succès
+        )
+
+        #Affichage des détails pédagogiques
+        details_text = (
+            f"• Binaire brut : {binary_result}\n"
+            f"• Binaire 8-bits : {binary_8bits}\n"
+            f"• Méthode : Division successive par 2\n"
+            f"• Vérification : {self.binary_to_decimal_explanation(binary_8bits)}"
+        )
+
+        self.details_label.config(
+            text=details_text,
+            fg='#34495e'
+        )
+
+        # Message de confirmation dans la console
+        print(f"Conversion ASCII->Binaire : {ascii_code} -> {binary_8bits}")
