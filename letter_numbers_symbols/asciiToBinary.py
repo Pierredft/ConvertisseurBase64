@@ -22,7 +22,7 @@ class ASCIIToBinaryApp:
         """
         self.root = root
         self.root.title("Convertisseur ASCII -> Binaire")
-        self.root.geometry("750x750")
+        self.root.geometry("800x600")
         self.root.resizable(False, False) # Ne pas redimensionner la fenêtre
         self.root.configure(bg="#F0F0F0")  # Couleur de fond
 
