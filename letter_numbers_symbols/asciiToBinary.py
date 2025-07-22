@@ -124,3 +124,23 @@ class ASCIIToBinaryApp:
             justify='center'
         )
         self.result_label.pack(pady=15)
+
+        # === SECTION DÉTAILS ===
+        details_frame = tk.Frame(
+            result_section,
+            bg='#ecf0f1',
+            relief='groove',
+            broderwidth=1,
+        )
+        details_frame.pack(pady=(10, 0), padx=10, fill='x', ipady=8)
+
+        self.details_label = tk.Label(
+            details_frame,
+            text="Les détails de conversion s'afficheront ici",
+            font=('Arial', 10),
+            bg='#ecf0f1',
+            fg='#7f8c8d',
+            wraplength=350,
+            justify='left'
+        )
+        self.details_label.pack(pady=5)
