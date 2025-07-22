@@ -16,21 +16,22 @@ class ASCIIToBinaryApp:
     Prend un code ASCII (0-127) et le convertit en binaire
     """
 
-    def __inti__(self, root):
+    def __init__(self, root):
         """
         Constructeur de l'application ASCII -> Binaire
         """
         self.root = root
         self.root.title("Convertisseur ASCII -> Binaire")
-        self.root.geometry("450x350")
+        self.root.geometry("750x750")
         self.root.resizable(False, False) # Ne pas redimensionner la fenêtre
+        self.root.configure(bg="#F0F0F0")  # Couleur de fond
 
         # Configuration du style
-        self.setup_styles()
+        # self.setup_styles()
         # Création de l'interface
         self.create_widgets()
 
-    def setup_styles(self):
+    def create_widgets(self):
         """ 
         Crée tous les éléments de l'interface graphique
         """
@@ -100,6 +101,8 @@ class ASCIIToBinaryApp:
 
         result_title = tk.Label(
             result_section,
+            text="Résultat de la conversion :",
+            font=('Arial', 12, 'bold'),
             bg='#f5f5f5',
             fg='#34495e',
         )
@@ -130,7 +133,7 @@ class ASCIIToBinaryApp:
             result_section,
             bg='#ecf0f1',
             relief='groove',
-            broderwidth=1,
+            borderwidth=1,
         )
         details_frame.pack(pady=(10, 0), padx=10, fill='x', ipady=8)
 
@@ -162,7 +165,7 @@ class ASCIIToBinaryApp:
             buttons_frame,
             text="📚 Exemples",
             style='Clear.TButton',
-            commande=self.show_examples
+            command=self.show_examples
         )
         examples_button.pack(side='right', padx=10)
 
@@ -233,7 +236,7 @@ class ASCIIToBinaryApp:
 
         # Affichage du résultat principal
         self.result_label.config(
-            text=f"ASCII {ascii_code} -> {binary_8bits}\n({char_info})",
+            text=f"ASCII {ascii_code} → {binary_8bits}\n{char_info}",
             fg='#27ae60' # Vert pour le succès
         )
 
@@ -262,14 +265,15 @@ class ASCIIToBinaryApp:
 
         # Parcourir chaque bit de droite à gauche
         for i, bit in enumerate(reversed(binary_str)):
-            power_of_2 = 2 ** i
-            decimal_value += power_of_2
-            explanation_parts.append(f"{power_of_2}")
+            if bit == '1':
+                power_of2 = 2 ** i
+                decimal_value += power_of2
+                explanation_parts.append(f"{power_of2}")
 
         if explanation_parts:
             return f"{' + '.join(explanation_parts)} = {decimal_value}"
         else:
-            return "Aucun bit à convertir"
+            return "0"
         
     def clear_all(self):
         """ 
@@ -294,7 +298,7 @@ class ASCIIToBinaryApp:
 
         examples_window = tk.Toplevel(self.root)
         examples_window.title("Exemples de conversions ASCII → Binaire")
-        examples_window.geometry("500x400")
+        examples_window.geometry("1000x800")
         examples_window.resizable(False, False)
         examples_window.configure(bg='#f8f9fa')
 
