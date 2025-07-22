@@ -252,3 +252,23 @@ class ASCIIToBinaryApp:
 
         # Message de confirmation dans la console
         print(f"Conversion ASCII->Binaire : {ascii_code} -> {binary_8bits}")
+
+    def binary_to_decimal_explanation(self, binary_str) :
+        """
+        Explique comment le binaire est converti en décimal
+        """
+        decimal_value = 0
+        explanation_parts = []
+
+        # Parcourir chaque bit de droite à gauche
+        for i, bit in enumerate(reversed(binary_str)):
+            power_of_2 = 2 ** i
+            decimal_value += power_of_2
+            explanation_parts.append(f"{power_of_2}")
+
+        if explanation_parts:
+            return f"{' + '.join(explanation_parts)} = {decimal_value}"
+        else:
+            return "Aucun bit à convertir"
+        
+    
