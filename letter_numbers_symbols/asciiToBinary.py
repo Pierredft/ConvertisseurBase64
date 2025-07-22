@@ -350,3 +350,21 @@ Le binaire se lit de droite à gauche avec les puissances de 2 :
             command=examples_window.destroy
         )
         close_button.pack(pady=15)
+
+# === POINT D'ENTRÉE DE L'APPLICATION ===
+if __name__ == "__main__":
+    """
+    Point d'entrée du programme
+    """
+    print("🚀 Lancement du convertisseur ASCII -> Binaire")
+
+    # Création de la fenêtre principale
+    root = tk.Tk()
+
+    # Création de notre applciation
+    app = ASCIIToBinaryApp(root)
+
+    # Lancement de la boucle d'événements
+    root.mainloop()
+
+    print("✅ Application fermée. Merci d'avoir utilisé le convertisseur !")
