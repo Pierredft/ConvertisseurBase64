@@ -161,4 +161,27 @@ class TextToBase64App:
         )
         self.step2_result.pack(fill='both', expand=True, padx=10, pady=5)
 
+        # === ÉTAPE 3 : REGROUPEMENT EN 6 BITS ===
+        step3_frame = tk.Frame(notebook, bg='white')
+        notebook.add(step3_frame, text=" ✂️ 3. Découpe en 6-bits")
+
+        step3_title = tk.Label(
+            step3_frame,
+            text="✂️ ÉTAPE 3 : Regroupement du binaire en blocs de 6 bits",
+            font=('Arial', 12, 'bold'),
+            bg='white',
+            fg='#27ae60'
+        )
+        step3_title.pack(pady=10)
+
+        self.step3_result = scrolledtext.ScrolledText(
+            step3_frame,
+            font=('Courier', 10),
+            height=12,
+            bg='#dff9fb',
+            fg='#2c3e50',
+            state=tk.DISABLED
+        )
+        self.step3_result.pack(fill='both', expand=True, padx=10, pady=5)
+
         
