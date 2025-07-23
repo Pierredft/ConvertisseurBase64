@@ -350,3 +350,46 @@ class TextToBase64App:
             ])
             return ascii_codes, "\n".join(result_lines)
             
+    def step2_ascii_to_binary(self, ascii_codes, original_text):
+        """
+        ÉTAPE 2 :Convertit les codes ASCII en binaire (8 bits chacun)
+        """
+        
+        binary_parts = []
+        result_lines = [
+            "🔢 CONVERSION ASCII -> BINAIRE",
+            "="*50,
+            "Chaque code ASCII est converti en binaire sur 8 bits :",
+            ""
+        ]
+
+        for i, ascii_code in enumerate(ascii_codes):
+            binary = bin(ascii_code)[2:].zfill(8) # Convertion et padding sur 8 bits
+            binary_parts.append(binary)
+
+            char = original_text[i]
+            display_char = '[ESPACE]' if char == ' ' else f"'{char}"
+
+            result_lines.append(f" {display_char:10} -> ASCII {ascii_code:3d} -> {binary}")
+
+        # Concaténation de tous les bits
+        binary_string = ''.join(binary_parts)
+
+        result_lines.extend([
+            "",
+            "⛓️‍💥 CONCATÉNATION DE TOUS LES BITS :",
+            f"Longueur totale : {len(binary_string)} bits",
+            "",
+            "Binaire complet :"
+        ])
+
+        # Affichage du binaire par groupes de 8 pour la lisibilité
+        for i in range(0, len(binary_string), 40):
+            chunk = binary_string[i:i+40]
+            # Ajouter des espaces tous les 8 bits
+            formatted_chunk = ' '.join(chunk[j:j+8] for j in range(0, len(chunk), 8))
+            result_lines.append(f" {formatted_chunk}")
+
+        return binary_string,  "\n".join(result_lines)
+    
+    
