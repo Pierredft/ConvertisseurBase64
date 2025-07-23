@@ -444,3 +444,37 @@ class TextToBase64App:
             f"📊 RÉSUMÉ : {len(six_bits_groups)} groupes de 6 bits créés"
         ])
         return six_bits_groups, "\n".join(result_lines)
+    
+    def step4_6bits_to_base64(self, six_bits_groups):
+        """
+        ÉTAPE 4 : Convertit les groupes de 6 bits en caractères Base64
+        """
+
+        result_lines = [
+            "🎯 CONVERSION 6-BITS -> CARACTÈRES BASE64",
+            "="*50,
+            "Table Base64 : A-Z(0-25), a-z(26-51), 0-9(52-61), + (62), / (63)",
+            "",
+        ]
+
+        base64_chars = []
+
+        for i, group in enumerate(six_bits_groups):
+            decimal_value = int(group, 2)
+            base64_char = self.base64_chars[decimal_value]
+            base64_chars.append(base64_char)
+
+            result_lines.append(
+                f" Groupe {i+1:2d}: {group} -> {decimal_value:2d} -> '{base64_char}'"
+            )
+
+        result_lines.extend([
+            "",
+            "🔤 CARACTÈRES BASE 64 OBTENUS :",
+            f" {''.join(base64_chars)}",
+            "",
+            f"📊 {len(base64_chars)} caractères Base64 générés"
+        ])
+
+        return base64_chars, "\n".join(result_lines)
+    
