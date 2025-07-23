@@ -137,4 +137,28 @@ class TextToBase64App:
             state=tk.DISABLED
         )
         self.step1_result.pack(fill='both', expand=True, padx=10, pady=5)
+
+        # === ÉTAPE 2 : ASCII -> BINAIRE ===
+        step2_frame = tk.Frame(notebook, bg='white')
+        notebook.add(step2_frame, text="🔢 2. ASCII -> BINAIRE")
+
+        step2_title = tk.Label(
+            step2_frame,
+            text="🔢 ÉTAPE 2 : Conversion Codes ASCII -> Binaire (8 bits par caractère)",
+            font=('Arial', 12, 'bold'),
+            bg='white',
+            fg='#f39c12'
+        )
+        step2_title.pack(pady=10)
+
+        self.step2_result = scrolledtext.ScrolledText(
+            step2_frame,
+            font=('Courier', 10),
+            height=12,
+            bg='#fef9e7',
+            fg='#2c3e50',
+            state=tk.DISABLED
+        )
+        self.step2_result.pack(fill='both', expand=True, padx=10, pady=5)
+
         
