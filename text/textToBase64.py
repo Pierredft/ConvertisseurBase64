@@ -184,4 +184,19 @@ class TextToBase64App:
         )
         self.step3_result.pack(fill='both', expand=True, padx=10, pady=5)
 
+        # === ÉTAPE 4 : 6-BITS -> BASE64 ===
+        step4_frame = tk.Frame(notebook, bg='white')
+        notebook.add(step4_frame, text="🎯 ÉTAPE 4: 6-bits -> Base64")
+
+        step4_title = tk.Label(
+            step4_frame,
+            text="🎯 ÉTAPE 4 : Conversion des 6-bits en Caractères Base64",
+            font=('Arial', 12, 'bold'),
+            bg='white',
+            fg='#8e44ad'
+        )
+        step4_title.pack(pady=10)
+
+        self.step4_result.pack(fill='both' , expand=True, padx=10, pady=5)
+
         
