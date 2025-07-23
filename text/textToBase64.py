@@ -270,3 +270,46 @@ class TextToBase64App:
             fg='#7f8c8d'
         )
         footer_info.pack(pady=10)
+
+    def convert_step_by_step(self):
+        """
+        Fonction principale qui effectue la conversion étape par étape
+        """
+
+        input_text = self.text_input.get().strip()
+
+        if not input_text:
+            messagebox.showwarning("Attention", "Veuillez saisir du texte !")
+            return
+        
+        # Effacer les résultats précédents
+        self.clear_results()
+
+        print(f"🔄 Début conversion : '{input_text}")
+
+        try:
+            # === Étape 1 : TEXTE -> ASCII ===
+            ascci_codes, step1_text = self.step1_text_to_ascii(input_text)
+
+            # === Étape 2 : ASCII -> BINAIRE ===
+            binary_string, step2_text = self.step2_ascii_to_binary(ascii_codes, input_text)
+
+            # === Étape 3 : REGROUPEMENT EN 6 BITS ===
+            six_bits_groups, step3_text = self.step3_group_6bits(binary_string)
+
+            # === Étape 4 : 6-BITS -> BASE64 ===
+            base64_chars, step4_text = self.step4_6bits_to_base64(six_bit_groups)
+
+            # === Étape 5 : RÉSULTAT FINAL ===
+            final_base64 = self.step5_final_result(base64_chars, input_text)
+
+            # Affichage des résultats dasn chaque onglet
+            self.display_step_result(self.step1_result, step1_text)
+            self.display_step_result(self.step2_result, step2_text)
+            self.display_step_result(self.step3_result, step3_text)
+            self.display_step_result(self.step4_result, step4_text)
+
+            print(f"✅ Conversion terminée : '{final_base64}'")
+        
+        except Exception as e:
+            messagebox.showerror("Erreur", f"Erreur lors de la conversion : {str(e)}")
