@@ -260,3 +260,13 @@ class TextToBase64App:
             fg='#2c3e50',
         )
         self.verify_result.pack()
+
+        # === INFO PIED DE PAGE ===
+        footer_info = tk.Label(
+            main_frame,
+            text="💡 Astuce : Utilisez des espaces pour séparer les mots.",
+            font=('Arial', 10),
+            bg='#f8f9fa',
+            fg='#7f8c8d'
+        )
+        footer_info.pack(pady=10)
