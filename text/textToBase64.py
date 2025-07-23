@@ -509,4 +509,24 @@ class TextToBase64App:
         self.current_result = final_base64
         return final_base64
     
-    
+    def display_step_result(self, text_widget, content):
+        """
+        Affiche le contenu dans un widget texte
+        """
+
+        text_widget.config(state=tk.NORMAL)
+        text_widget.delete(1.0, tk.END)
+        text_widget.insert(tk.END, content)
+        text_widget.config(state=tk.DISABLED)
+
+    def copy_result(self):
+        """
+        Copie le résultat Base64 dans le presse-papiers
+        """
+        
+        if hasattr(self, 'current_result'):
+            self.root.clipboard_clear()
+            self.root.clipboard_append(self.current_result)
+            messagebox.showinfo("Copié", f"Résultat copié : {self.current_result}")
+        else:
+            messagebox.showwarning("Aucun résultat", "Aucun résultat à copier !")
