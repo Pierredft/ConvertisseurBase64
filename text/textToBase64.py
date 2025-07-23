@@ -392,4 +392,55 @@ class TextToBase64App:
 
         return binary_string,  "\n".join(result_lines)
     
-    
+    def step3_group_6bits(self, binary_string):
+        """
+        ÉTAPE 3 : Regroupe le binaire en blocs de 6 bits
+        """
+
+        result_lines = [
+            "✂️ REGROUPEMENT EN 6 BITS",
+            "="*50,
+            "Base64 utilise des groupes de 6 bits (2^6 = 64 possibilités)",
+            "",
+            f"Binaire d'entrée ({len(binary_string)} bits) :",
+        ]
+
+        # Affichage du binaire d'origine
+        for i in range(0, len(binary_string), 48):
+            chunk = binary_string[i:i+48]
+            formatted_chunk = ' '.join(chunk[j:j+8] for j in range(0, len(chunk), 8))
+            result_lines.append(f" {formatted_chunk}")
+
+        # Padding si nécessaire (doit être multiple de 6)
+        padded_binary = binary_string
+        padding_needed = (6 - len(binary_string) %6) %6
+        if padding_needed > 0:
+            padded_binary += '0' * padding_needed
+            result_lines.extend([
+                "",
+                f"⚠️ PADDING NÉCESSAIRE : {padding_needed} zéros ajoutés",
+                f"Binaire avec padding ({len(padded_binary)} bits) :",
+            ])
+            for i in range(0, len(padded_binary), 48):
+                chunk = padded_binary[i:i+48]
+                formatted_chunk = ' '.join(chunk[j:j+8] for j in range(0, len(chunk), 8))
+                result_lines.append(f" {formatted_chunk}")
+
+        # Découpage en groupes de 6 bits
+        six_bits_groups = []
+        result_lines.extend([
+            "",
+            "✂️ DÉCOUPAGE EN GROUPES DE 6 BITS :"
+        ])
+
+        for i in range(0, len(padded_binary), 6):
+            group = padded_binary[i:i+6]
+            six_bits_groups.append(group)
+            decimal_value = int(group, 2)
+            result_lines.append(f" Groupe {len(six_bits_groups)} : {group} -> décimal {decimal_value:2d}")
+
+        result_lines.extend([
+            "",
+            f"📊 RÉSUMÉ : {len(six_bits_groups)} groupes de 6 bits créés"
+        ])
+        return six_bits_groups, "\n".join(result_lines)
