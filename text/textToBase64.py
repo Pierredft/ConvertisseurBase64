@@ -478,3 +478,35 @@ class TextToBase64App:
 
         return base64_chars, "\n".join(result_lines)
     
+    def step5_final_result(self,base64_chars, original_text):
+        """
+        ÉTAPE 5 : Finalise le resultat avec le padding base64 (=)
+        """
+
+        # Calcul du padding nécessaire
+        padding_needed = (4 - len(base64_chars) % 4) % 4
+
+        # Résultat final
+        final_base64 = ''.join(base64_chars) + '=' * padding_needed
+
+        # Affichage du résultat final
+        self.final_result.config(
+            text=f"'{original_text}' -> {final_base64}",
+            fg='#8e44ad'
+        )
+
+        # Vérification avec Python
+        python_result = base64.b64encode(original_text.encode('utf-8')).decode('ascii')
+
+        if final_base64 == python_result:
+            verify_text = f"✅ CORRECT ! Python donne : {python_result}"
+            color = '#27ae60'
+        else:
+            verification_text = f"❌ ERREUR ! Python donne : {python_result}"
+            color = '#e74c3c'
+
+        self.verify_result.config(text=verification_text, fg=color)
+        self.current_result = final_base64
+        return final_base64
+    
+    
