@@ -313,3 +313,40 @@ class TextToBase64App:
         
         except Exception as e:
             messagebox.showerror("Erreur", f"Erreur lors de la conversion : {str(e)}")
+
+    def step1_texto_ascii(self, text):
+        """
+        Convertit chaque caractère en code ASCII
+        """
+
+        ascii_codes = []
+        result_lines = [
+            "📝 CONVERTION TEXTE -> ASCII",
+            "="*50,
+            f"Text d'entrée : '{text}'",
+            f"CLongueur : {len(text)} caractères",
+            "",
+            "Conversion caractère par caractère :"
+        ]
+
+        for i, char in enumerate(text):
+            ascii_code = ord(char)
+            ascii_codes.append(ascii_code)
+            
+            # Formatage de l'affichage du caractère
+            if char == ' ':
+                display_char = '[ESPACE]'
+            elif char.isprintable():
+                display_char = f" '{char}'"
+            else:
+                display_char = f'[CTRL-{ascii_code}]'
+            
+            result_lines.append(f" POS {i+1:2d}: {display_char:10} -> ASCII {ascii_code:3d}")
+
+            result_lines.extend([
+                "",
+                "📊 RÉSUMÉ :",
+                f"Codes ASCII : {ascii_codes}"
+            ])
+            return ascii_codes, "\n".join(result_lines)
+            
