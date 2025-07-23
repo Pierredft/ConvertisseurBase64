@@ -289,7 +289,7 @@ class TextToBase64App:
 
         try:
             # === Étape 1 : TEXTE -> ASCII ===
-            ascci_codes, step1_text = self.step1_text_to_ascii(input_text)
+            ascii_codes, step1_text = self.step1_text_to_ascii(input_text)
 
             # === Étape 2 : ASCII -> BINAIRE ===
             binary_string, step2_text = self.step2_ascii_to_binary(ascii_codes, input_text)
@@ -298,7 +298,7 @@ class TextToBase64App:
             six_bits_groups, step3_text = self.step3_group_6bits(binary_string)
 
             # === Étape 4 : 6-BITS -> BASE64 ===
-            base64_chars, step4_text = self.step4_6bits_to_base64(six_bit_groups)
+            base64_chars, step4_text = self.step4_6bits_to_base64(six_bits_groups)
 
             # === Étape 5 : RÉSULTAT FINAL ===
             final_base64 = self.step5_final_result(base64_chars, input_text)
