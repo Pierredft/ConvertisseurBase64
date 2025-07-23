@@ -199,4 +199,64 @@ class TextToBase64App:
 
         self.step4_result.pack(fill='both' , expand=True, padx=10, pady=5)
 
-        
+        # == ÉTAPE 5 : RÉSULTAT FINAL ===  
+        step5_frame = tk.Frame(notebook, bg='white')
+        notebook.add(step5_frame, text="🏁 Résultat Final")
+
+        step5_title = tk.label(
+            step5_frame,
+            text="🏁 RÉSULTAT FINAL : Texte Converti en Base64",
+            font=('Arial', 12, 'bold'),
+            bg='white',
+            fg='#2980b9'
+        )
+        step5_title.pack(pady=20)
+
+        # Cadre pour le resultat final
+        result_frame = tk.Frame(
+            step5_frame,
+            bg='#f8f9fa',
+            borderwidth=2
+        )
+        result_frame.pack(pady=20, padx=50, fill='x')
+
+        self.final_result = tk.Label(
+            result_frame,
+            text="Le resultat Base64 apparaîtra ici",
+            font=('Courier', 14, 'bold'),
+            bg='#f8f9fa',
+            fg='#2c3e50',
+            pady=20,
+            wraplength=600
+        )
+        self.final_result.pack()
+
+        # Bouton copier
+        copy_button = ttk.Button(
+            step5_frame,
+            text="📋 Copier le résultat",
+            style='Action.TButton',
+            command=self.copy_result
+        )
+        copy_button.pack(pady=10)
+
+        # Vérification avec Python
+        verify_frame = tk.LabelFrame(
+            step5_frame,
+            text="🔍 Vérification avec Pbase64.b64encode()",
+            font=('Arial', 10, 'bold'),
+            bg='white',
+            fg="#34495e",
+            padx=10,
+            pady=10
+        )
+        verify_frame.pack(fill='x', padx=50, pady=20)
+
+        self.verify_result = tk.Label(
+            verify_frame,
+            text='La vérification apparaîtra ici',
+            font=('Courier', 11),
+            bg='white',
+            fg='#2c3e50',
+        )
+        self.verify_result.pack()
