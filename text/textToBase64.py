@@ -530,3 +530,39 @@ class TextToBase64App:
             messagebox.showinfo("Copié", f"Résultat copié : {self.current_result}")
         else:
             messagebox.showwarning("Aucun résultat", "Aucun résultat à copier !")
+
+    def load_example(self):
+        """
+        Charge un exemple de texte prédéfini
+        """
+        
+        examples = ["Bonjour le monde !", "Python est génial !", "Base64 est amusant !"]
+        import random
+        example = random.choice(examples)
+
+        self.text_input.delete(0, tk.END)
+        self.text_input.insert(0, example)
+
+    def clear_results(self):
+        """
+        Efface tous les résultats des étapes
+        """
+
+        widgets = [self.step1_result, self.step2_result, self.step3_result, self.step4_result]
+        for widget in widgets:
+            widget.config(state=tk.NORMAL)
+            widget.delete(1.0, tk.END)
+            widget.insert('1.0', "Les résultats apparaîtront ici après conversion...")
+            widget.config(state=tk.DISABLED)
+    
+        self.final_result.config(text="Le résultat Base64 apparaîtra ici", fg='#95a5a6')
+        self.verify_result.config(text="La vérification apparaîtra ici", fg='#95a5a6')
+
+    def clear_all(self):
+        """
+        Remet tout à zéro
+        """
+
+        self.text_input.delete(0, tk.END)
+        self.clear_results()
+        self.text_input.focus()
